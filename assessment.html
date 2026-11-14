@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0b0d">
+  <title>自我評估｜酒精戒斷防跌照護</title>
+  <meta name="description" content="10 題戒斷症狀自我觀察，算出今天的安全燈號與照護重點。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="assessment">
+  <div class="page">
+    <header id="site-header"></header>
+    <div id="site-notice"></div>
+    <main id="main" class="fade-in">
+      <div class="page-head">
+        <p class="eyebrow">自我評估</p>
+        <h1 class="page-title">今天的症狀觀察</h1>
+        <p class="page-lead" id="intro"></p>
+      </div>
+
+      <div class="progress" aria-live="polite">
+        <span class="progress__done" id="progress-done"></span>
+        <span class="progress__score">目前總分 <strong id="progress-score">0</strong> / <span id="progress-max"></span></span>
+        <span class="progress__bar" id="progress-bar"></span>
+      </div>
+
+      <div id="items" class="items"></div>
+
+      <button type="button" class="btn" id="submit" disabled>查看結果</button>
+      <p class="submit-hint" id="submit-hint"></p>
+
+      <section class="result" id="result" hidden aria-live="polite"></section>
+    </main>
+    <footer id="site-footer"></footer>
+  </div>
+  <script src="js/content.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/assessment.js"></script>
+</body>
+</html>
