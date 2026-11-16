@@ -98,72 +98,64 @@
     );
   }
 
-  function youtubeEmbedUrl(url) {
-    const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
-    return match ? `https://www.youtube-nocookie.com/embed/${match[1]}` : null;
-  }
-
-  function renderVideo(url) {
-    const embed = youtubeEmbedUrl(url);
-    if (!embed) {
-      return el("div", { class: "media" }, el("a", { class: "video-link", href: url, target: "_blank", rel: "noopener", text: "觀看影片" }));
-    }
-    return el(
-      "div",
-      { class: "media video" },
-      el("iframe", {
-        src: embed,
-        title: "衛教影片",
-        loading: "lazy",
-        allow: "encrypted-media; picture-in-picture",
-        allowfullscreen: true
-      })
-    );
-  }
-
   function renderFallCare() {
+    const data = C.fallCare;
     main.append(pageHead("跌倒嚴重性與照護措施", "跌倒可能造成的傷害與照護", "了解跌倒的嚴重性，以及照顧者可以怎麼做。"));
 
-    if (C.fallCare.length === 0) {
+    if (!data || !data.intro) {
       main.append(emptyState());
       return;
     }
 
-    C.fallCare.forEach((part) => {
-      main.append(
+    main.append(
+      el(
+        "article",
+        { class: "card" },
+        el("h2", { class: "card__title", text: data.introTitle }),
+        el("p", { class: "prose", text: data.intro })
+      ),
+      el(
+        "section",
+        { class: "card" },
+        el("h2", { class: "card__title", text: data.injuriesTitle }),
         el(
-          "article",
-          { class: "card" },
-          part.severity ? el("span", { class: "severity", text: part.severity }) : null,
-          el("h3", { class: "section-label", text: "發生什麼事" }),
-          el("p", { text: part.whatHappens }),
-          part.caregiverActions && part.caregiverActions.length
-            ? [
-                el("h3", { class: "section-label", text: "照顧者可以做什麼" }),
-                el("ul", { class: "bullets" }, part.caregiverActions.map((line) => el("li", { text: line })))
-              ]
-            : null,
-          part.image && part.image.src
-            ? el(
-                "figure",
-                { class: "media" },
-                el("img", { src: part.image.src, alt: part.image.alt || "", loading: "lazy" }),
-                part.image.alt ? el("figcaption", { text: part.image.alt }) : null
+          "div",
+          { class: "injury-list" },
+          data.injuries.map((item) =>
+            el(
+              "article",
+              { class: "injury" },
+              el("img", { class: "injury__icon", src: item.icon, alt: "" }),
+              el(
+                "div",
+                {},
+                el("h3", { class: "injury__title", text: item.title }),
+                el("p", { text: item.body })
               )
-            : null,
-          part.videoUrl ? renderVideo(part.videoUrl) : null
+            )
+          )
         )
-      );
-    });
+      ),
+      el(
+        "section",
+        { class: "card" },
+        el("h2", { class: "card__title", text: data.preventionTitle }),
+        el(
+          "figure",
+          { class: "poster" },
+          el("img", { src: data.preventionImage.src, alt: data.preventionImage.alt, loading: "lazy" })
+        )
+      )
+    );
   }
 
   function renderScenario(scenario, index) {
     const explain = el(
       "div",
       { class: "explain", hidden: true },
-      el("h3", { class: "section-label", text: "較合適的做法" }),
+      el("h3", { class: "section-label", text: "正確答案" }),
       el("p", { text: scenario.bestPractice }),
-      el("h3", { class: "section-label", text: "為什麼" }),
+      el("h3", { class: "section-label", text: "解析" }),
       el("p", { text: scenario.why })
     );
 
@@ -187,14 +179,15 @@
       "article",
       { class: "card" },
       el("p", { class: "eyebrow", text: `情境 ${index + 1}` }),
-      el("p", { class: "card__title", text: scenario.situation }),
+      scenario.title ? el("h2", { class: "card__title", text: scenario.title }) : null,
+      el("p", { class: "prose", text: scenario.situation }),
       el("div", { class: "options" }, buttons),
       explain
     );
   }
 
   function renderScenarios() {
-    main.append(pageHead("情境挑戰", "遇到這些狀況，怎麼做比較安全", "先選你會怎麼做，再看較合適的做法與原因。"));
+    main.append(pageHead("情境挑戰", "遇到這些狀況，怎麼做比較安全", "先選你會怎麼做，再看正確答案與解析。"));
 
     if (C.scenarios.length === 0) {
       main.append(emptyState());

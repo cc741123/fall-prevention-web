@@ -156,6 +156,7 @@
         "div",
         { class: `result__summary light--${light.id} fade-in` },
         el("p", { class: "eyebrow", text: "本次總分" }),
+        light.mascot ? el("img", { class: "result__mascot", src: light.mascot, alt: "" }) : null,
         el("p", { class: "result__score" }, String(total), el("small", { text: ` / ${maxScore}` })),
         el("p", { class: "result__light", text: `${light.name}｜${light.title}` }),
         el("p", { class: "result__range", text: `${light.name}範圍：${threshold.min}–${threshold.max} 分` })

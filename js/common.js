@@ -73,15 +73,14 @@
     );
     if (!isHome) header.append(el("a", { class: "back-link", href: "index.html", text: "← 回首頁" }));
 
-    notice.className = "notice";
-    notice.setAttribute("role", "note");
-    notice.append(
-      el("img", { class: "notice__icon", src: ICONS.siren, alt: "" }),
-      el("div", {}, el("strong", { text: C.site.emergencyNotice }))
-    );
+    if (notice) notice.hidden = true;
 
     footer.className = "site-footer";
-    footer.textContent = C.site.disclaimer;
+    footer.setAttribute("role", "note");
+    footer.append(
+      el("p", { class: "site-footer__alert", text: C.site.emergencyNotice }),
+      el("p", { class: "site-footer__note", text: C.site.disclaimer })
+    );
   }
 
   mountShell();
