@@ -34,7 +34,18 @@
     return getLight(thresholdForScore(score).light);
   }
 
+  function lightAlt(light) {
+    return `${light.name}｜${light.title}。${light.subtitle}。症狀表現：${light.symptoms}照護重點：${light.care.join("")}`;
+  }
+
   function renderLightCard(light) {
+    if (light.figure) {
+      return el(
+        "figure",
+        { class: `light-figure light--${light.id} fade-in` },
+        el("img", { src: light.figure, alt: lightAlt(light) })
+      );
+    }
     return el(
       "article",
       { class: `card light-card light--${light.id} fade-in`, "aria-label": `${light.name}｜${light.title}` },
@@ -67,7 +78,7 @@
       el(
         "a",
         { class: "brand", href: "index.html" },
-        el("span", { class: "brand__dots", "aria-hidden": "true" }, el("span"), el("span"), el("span")),
+        el("img", { class: "brand__signal", src: "assets/images/traffic-signal.svg", alt: "" }),
         C.site.title
       )
     );

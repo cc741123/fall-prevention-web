@@ -7,11 +7,11 @@ window.SITE_CONTENT = {
   },
 
   sections: [
-    { href: "assessment.html", title: "自我評估", desc: "10 題症狀觀察，算出今天的安全燈號" },
-    { href: "symptoms.html", title: "酒癮症狀", desc: "突然停酒或減量後，身體可能出現的變化" },
-    { href: "traffic-light.html", title: "安全紅綠燈", desc: "綠、黃、紅三種燈號的意義與照護重點" },
-    { href: "fall-care.html", title: "跌倒嚴重性與照護措施", desc: "跌倒可能造成的傷害與預防方法" },
-    { href: "scenarios.html", title: "情境挑戰", desc: "遇到這些狀況時，怎麼做比較安全" }
+    { href: "assessment.html", title: "自我評估", desc: "10 題症狀觀察，算出今天的安全燈號", icon: "assets/images/nav-assess.svg" },
+    { href: "symptoms.html", title: "酒癮症狀", desc: "突然停酒或減量後，身體可能出現的變化", icon: "assets/images/nav-symptoms.svg" },
+    { href: "traffic-light.html", title: "安全紅綠燈", desc: "綠、黃、紅三種燈號的意義與照護重點", icon: "assets/images/nav-lights.svg" },
+    { href: "fall-care.html", title: "跌倒嚴重性與照護措施", desc: "跌倒可能造成的傷害與預防方法", icon: "assets/images/nav-fall.svg" },
+    { href: "scenarios.html", title: "情境挑戰", desc: "遇到這些狀況時，怎麼做比較安全", icon: "assets/images/nav-scenario.svg" }
   ],
 
   lights: [
@@ -22,6 +22,7 @@ window.SITE_CONTENT = {
       subtitle: "持續做好基本防跌措施",
       icon: "check",
       mascot: "assets/images/q-green.svg",
+      figure: "assets/images/light-green.jpg",
       symptoms: "意識清楚、情緒平穩，沒有明顯手抖、頭暈或躁動。",
       care: [
         "床欄拉起使用。",
@@ -37,13 +38,14 @@ window.SITE_CONTENT = {
       subtitle: "提高警覺，加強安全照護",
       icon: "alert",
       mascot: "assets/images/q-yellow.svg",
+      figure: "assets/images/light-yellow.jpg",
       symptoms: "出現手抖、冒汗、頭暈、焦慮、坐立不安或睡不好等情況。",
       care: [
         "主動告知護理人員身體出現的變化。",
         "不要讓病人獨自下床或上廁所。",
         "家屬加強陪伴，注意病人是否突然想下床。",
         "保持環境安靜、減少不必要的刺激。",
-        "視情況約束。",
+        "視情況約束（依醫護人員評估與指示辦理）。",
         "將病床靠牆、陪病椅緊靠床欄的另一側。"
       ]
     },
@@ -54,6 +56,7 @@ window.SITE_CONTENT = {
       subtitle: "立即通知護理人員",
       icon: "siren",
       mascot: "assets/images/q-red.svg",
+      figure: "assets/images/light-red.jpg",
       symptoms: "出現幻覺、明顯躁動、意識混亂、抽搐，或不顧安全反覆試圖自行下床。",
       care: [
         "立即按鈴通知護理人員。",
@@ -196,6 +199,7 @@ window.SITE_CONTENT = {
     introTitle: "跌倒有多嚴重？",
     intro: "跌倒不只是跌一跤而已！一次不小心的跌倒，可能造成身體受傷、行動不便，甚至危及生命。住院期間，病人可能因疾病、身體虛弱、藥物影響或酒精戒斷症狀，造成頭暈、肌肉無力、步態不穩或意識混亂，增加跌倒的風險。",
     injuriesTitle: "跌倒可能造成哪些傷害？",
+    injuriesImage: "assets/images/injuries-card.jpg",
     injuries: [
       {
         title: "擦傷、瘀青",

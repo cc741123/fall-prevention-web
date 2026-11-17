@@ -36,8 +36,13 @@
       el(
         "div",
         { class: "hero" },
-        el("div", { class: "hero__lights", "aria-hidden": "true" }, el("span"), el("span"), el("span")),
-        el("h1", { class: "hero__title", text: C.site.title }),
+        el(
+          "div",
+          { class: "hero__lockup" },
+          el("img", { class: "hero__signal", src: "assets/images/traffic-signal.svg", alt: "" }),
+          el("span", { class: "hero__rule", "aria-hidden": "true" }),
+          el("h1", { class: "hero__title", text: C.site.title })
+        ),
         el("p", { class: "page-lead", text: C.site.subtitle })
       ),
       el(
@@ -50,7 +55,7 @@
             el(
               "a",
               { class: "entry", href: section.href },
-              el("span", { class: "entry__no", text: String(i + 1) }),
+              el("img", { class: "entry__icon", src: section.icon, alt: "" }),
               el(
                 "span",
                 { class: "entry__body" },
@@ -115,30 +120,16 @@
         el("p", { class: "prose", text: data.intro })
       ),
       el(
-        "section",
-        { class: "card" },
-        el("h2", { class: "card__title", text: data.injuriesTitle }),
-        el(
-          "div",
-          { class: "injury-list" },
-          data.injuries.map((item) =>
-            el(
-              "article",
-              { class: "injury" },
-              el("img", { class: "injury__icon", src: item.icon, alt: "" }),
-              el(
-                "div",
-                {},
-                el("h3", { class: "injury__title", text: item.title }),
-                el("p", { text: item.body })
-              )
-            )
-          )
-        )
+        "figure",
+        { class: "figure-card" },
+        el("img", {
+          src: data.injuriesImage,
+          alt: `${data.injuriesTitle}${data.injuries.map((item) => `${item.title}：${item.body}`).join("")}`
+        })
       ),
       el(
         "section",
-        { class: "card" },
+        { class: "card poster-card" },
         el("h2", { class: "card__title", text: data.preventionTitle }),
         el(
           "figure",
@@ -159,21 +150,36 @@
       el("p", { text: scenario.why })
     );
 
-    const buttons = scenario.options.map((option) =>
-      el("button", {
-        type: "button",
-        class: "option",
-        text: option.text,
-        onclick: (event) => {
-          buttons.forEach((button, i) => {
-            button.disabled = true;
-            if (scenario.options[i].isBest) button.classList.add("is-best");
-          });
-          event.currentTarget.classList.add("is-chosen");
-          explain.hidden = false;
-        }
-      })
-    );
+    const buttons = scenario.options.map((option) => {
+      const mark = el("span", { class: "option__mark", "aria-hidden": "true" });
+      const button = el(
+        "button",
+        {
+          type: "button",
+          class: "option",
+          onclick: (event) => {
+            buttons.forEach((btn, i) => {
+              btn.disabled = true;
+              const best = scenario.options[i].isBest;
+              const chosen = btn === event.currentTarget;
+              if (best) {
+                btn.classList.add("is-best");
+                btn.querySelector(".option__mark").textContent = "✓ 正確";
+              } else if (chosen) {
+                btn.classList.add("is-wrong");
+                btn.querySelector(".option__mark").textContent = "✕ 錯誤";
+              } else {
+                btn.classList.add("is-dim");
+              }
+            });
+            explain.hidden = false;
+          }
+        },
+        el("span", { class: "option__text", text: option.text }),
+        mark
+      );
+      return button;
+    });
 
     return el(
       "article",
