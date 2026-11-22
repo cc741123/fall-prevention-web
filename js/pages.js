@@ -99,7 +99,92 @@
           )
         )
       ),
-      el("a", { class: "btn btn--ghost", href: "traffic-light.html", text: "查看安全紅綠燈" })
+      el(
+        "div",
+        { class: "page-nav" },
+        el("a", { class: "btn", href: "withdrawal-care.html", text: "下一頁：發生酒精戒斷，該怎麼辦？" }),
+        el("a", { class: "btn btn--ghost", href: "traffic-light.html", text: "查看安全紅綠燈" })
+      )
+    );
+  }
+
+  function renderCareStep(step, index) {
+    return el(
+      "article",
+      { class: `card care-step care-step--${index + 1}` },
+      el(
+        "div",
+        { class: "care-step__head" },
+        el("span", { class: "care-step__num", "aria-hidden": "true", text: String(index + 1) }),
+        el("h2", { class: "care-step__title", text: step.title })
+      ),
+      el("img", { class: "care-step__img", src: step.image, alt: step.imageAlt }),
+      el("p", { class: "prose", text: step.body }),
+      step.drugs
+        ? el(
+            "ul",
+            { class: "drug-list" },
+            step.drugs.map((drug) =>
+              el(
+                "li",
+                { class: "drug" },
+                el("p", { class: "drug__name", text: drug.name }),
+                drug.note ? el("p", { class: "drug__note", text: `（${drug.note}）` }) : null,
+                el("p", { class: "drug__effect", text: `→ ${drug.effect}` })
+              )
+            )
+          )
+        : null,
+      el(
+        "div",
+        { class: "callout callout--tip" },
+        el("span", { class: "callout__icon", "aria-hidden": "true", text: "!" }),
+        el(
+          "p",
+          { class: "callout__text" },
+          el("strong", { text: "衛教重點：" }),
+          step.tip
+        )
+      )
+    );
+  }
+
+  function renderWithdrawalCare() {
+    const data = C.withdrawalCare;
+    main.append(
+      pageHead("酒癮症狀", data.title, data.lead),
+      ...data.steps.map(renderCareStep),
+      el(
+        "section",
+        { class: "card after-care" },
+        el("h2", { class: "card__title", text: data.afterTitle }),
+        el("p", { class: "prose", text: data.afterLead }),
+        el(
+          "ul",
+          { class: "after-grid" },
+          data.afterItems.map((item) =>
+            el(
+              "li",
+              { class: "after-item" },
+              el("img", { class: "after-item__img", src: item.image, alt: item.imageAlt }),
+              el("h3", { class: "after-item__title", text: item.title }),
+              el("p", { class: "after-item__body", text: item.body })
+            )
+          )
+        ),
+        el(
+          "div",
+          { class: "callout callout--warn" },
+          el("span", { class: "callout__icon", "aria-hidden": "true", text: "!" }),
+          el("p", { class: "callout__text" }, el("strong", { text: data.reminderTitle }), data.reminder)
+        )
+      ),
+      el(
+        "div",
+        { class: "page-nav" },
+        el("a", { class: "btn", href: "traffic-light.html", text: "下一頁：查看安全紅綠燈" }),
+        el("a", { class: "btn btn--ghost", href: "symptoms.html", text: "← 上一頁：突然停酒後會發生什麼事" })
+      )
     );
   }
 
@@ -207,6 +292,7 @@
     home: renderHome,
     lights: renderLights,
     symptoms: renderSymptoms,
+    withdrawal: renderWithdrawalCare,
     fall: renderFallCare,
     scenarios: renderScenarios
   };

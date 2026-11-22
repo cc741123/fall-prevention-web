@@ -1076,3 +1076,189 @@ main {
     padding: var(--s4);
   }
 }
+
+/* ---------- Withdrawal care (symptoms page 2) ---------- */
+
+.page-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.care-step {
+  --accent: #2f78b5;
+  --accent-soft: #e8f2fb;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  border-top: 6px solid var(--accent);
+}
+
+.care-step--2 {
+  --accent: #b8405e;
+  --accent-soft: #fbeaef;
+}
+
+.care-step--3 {
+  --accent: #2f8a4f;
+  --accent-soft: #e6f5ea;
+}
+
+.care-step--4 {
+  --accent: #6c4fb0;
+  --accent-soft: #efeafa;
+}
+
+.care-step__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+}
+
+.care-step__num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.care-step__title {
+  font-size: var(--fs-card);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.care-step__img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background: var(--accent-soft);
+}
+
+.drug-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: 0;
+  list-style: none;
+}
+
+.drug {
+  padding: var(--s3) var(--s4);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+
+.drug__name {
+  font-weight: 700;
+}
+
+.drug__note {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.drug__effect {
+  margin-top: var(--s1);
+}
+
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
+  padding: var(--s3) var(--s4);
+  border-radius: var(--radius-sm);
+}
+
+.callout--tip {
+  background: #fff4d6;
+  border: 1px solid #ecc766;
+}
+
+.callout--warn {
+  background: #fdecec;
+  border: 2px solid var(--red);
+}
+
+.callout__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  border-radius: 50%;
+  background: #e69a00;
+  color: #fff;
+  font-weight: 700;
+}
+
+.callout--warn .callout__icon {
+  background: var(--red);
+}
+
+.callout__text strong {
+  display: block;
+  font-size: 18px;
+}
+
+.callout--warn .callout__text strong {
+  color: var(--red);
+}
+
+.after-care {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.after-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s3);
+  padding: 0;
+  list-style: none;
+}
+
+.after-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+  padding: var(--s3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+
+.after-item__img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.after-item__title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.after-item__body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+@media (max-width: 380px) {
+  .after-grid {
+    grid-template-columns: 1fr;
+  }
+}
